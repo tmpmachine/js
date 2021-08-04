@@ -1,0 +1,54 @@
+<canvas id="canvas" style="border:1px solid;"></canvas>
+
+<script> L = console.log </script>
+<script>
+  
+  let left = false;
+  let right = false;
+  let up = false;
+  let down = false;
+  let x = 0;
+  let y = 0;
+  let c = canvas.getContext('2d');
+  
+  function animate() {
+    
+    if (left)
+      x--;
+    if (right)
+      x++;
+    if (up)
+      y--;
+    if (down)
+      y++;
+    
+    c.clearRect(0, 0, canvas.width, canvas.height);
+    c.fillRect(x, y, 20, 20);
+    
+    window.requestAnimationFrame(animate);
+  }
+  
+  animate();
+  
+  document.addEventListener('keydown', keyHandler);
+  document.addEventListener('keyup', keyHandler);
+  
+  function keyHandler(event) {
+    L(event.keyCode)
+    switch (event.keyCode) {
+      case 65: // A
+        left = (event.type == 'keydown');
+        break;
+      case 68: // D
+        right = (event.type == 'keydown');
+        break;
+      case 87: // W
+        up = (event.type == 'keydown');
+        break;
+      case 83: // S
+        down = (event.type == 'keydown');
+        break;
+    }
+  }
+  
+</script>
