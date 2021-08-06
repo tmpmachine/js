@@ -1,0 +1,40 @@
+Instruction : Click canvas to simulate jump.
+<canvas id="canvas" width=320 height="568" style="border:1px solid;"></canvas>
+<script> L = console.log </script>
+<script>
+  
+  let x = 50;
+  let y = 50;
+  let size = 20;
+  let velY = 0;
+  let jumpPower = 10;
+  let gravity = 1;
+  let airFriction = 0.7;
+  let c = canvas.getContext('2d');
+  
+  function animate() {
+    
+    // kecepatan jatuh
+    velY += gravity;
+    y += velY * airFriction;
+    
+    if (y > canvas.height-size) {
+      y = canvas.height-size;
+      velY = 0;
+    }
+    
+    c.clearRect(0, 0, canvas.width, canvas.height);
+    c.fillRect(x, y, size, size);
+    
+    window.requestAnimationFrame(animate);
+  }
+  
+  canvas.addEventListener('click', jump);
+  
+  function jump() {
+    velY -= jumpPower;
+  }
+  
+  animate();
+  
+</script>
